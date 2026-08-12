@@ -70,7 +70,12 @@ This is a **take-home** flow: the repository is short-lived and lives in Cloudfl
 
 - Exported repositories are temporary and are not backed up. Once a repository expires, it cannot be recovered.
 - The clone credential is read-only and single-purpose. You cannot push back to the temporary repository — push to your own Git host instead.
-- Code export is intended for small, self-contained projects that Agent Lee generates during a conversation.
+- Code export is intended for small, self-contained projects that Agent Lee generates during a conversation. A single export can include:
+  - up to 50 files
+  - up to 100 KB per file
+  - up to 2 MB in total
+
+  Agent Lee tells you if a project is too large to export. If that happens, ask it for a smaller subset of the project.
 
 ## Related resources
 
