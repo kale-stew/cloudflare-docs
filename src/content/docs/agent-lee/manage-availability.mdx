@@ -1,0 +1,124 @@
+---
+title: Manage Agent Lee availability
+pcx_content_type: how-to
+description: Control whether Agent Lee is visible to you, choose read-only or full access, and understand what happens when an admin restricts write permissions.
+sidebar:
+  order: 3
+head:
+  - tag: title
+    content: Manage Agent Lee availability
+products:
+  - agent-lee
+---
+
+import { Description, Steps } from "~/components";
+
+<Description>
+
+Control whether Agent Lee is visible to you, choose read-only or full access, and understand what happens when an admin restricts write permissions.
+
+</Description>
+
+:::note[Beta]
+Agent Lee is currently in beta. Features and behaviors may change.
+:::
+
+Agent Lee offers several ways to control access and permissions. The table below summarizes each control, who can use it, and what it blocks.
+
+| Control | Who can set it | What it blocks | How to change |
+|---|---|---|---|
+| Turn Agent Lee off | You | All Agent Lee access | Account Configurations |
+| Read-only mode | You | Write tool calls | Permission Settings |
+| Custom scopes | You | Anything you deselect | Permission Settings |
+| Admin write restriction | Account admin | Write tool calls | Admin path in the dashboard |
+
+## Turn Agent Lee off for yourself
+
+If you do not want to use Agent Lee, you can hide it from the dashboard. This disables the **Ask AI** sidebar, the CMD+/ shortcut, and every other Agent Lee entry point.
+
+<Steps>
+
+1. In the Cloudflare dashboard, go to your account and select **Configurations** > **Preferences**.
+
+2. Find the **Agent Lee** section and toggle it off.
+
+3. Agent Lee revokes your current API token and hides all Ask AI surfaces across the dashboard.
+
+4. To re-enable Agent Lee, return to the same toggle and turn it on.
+
+</Steps>
+
+When Agent Lee is turned off, no data is sent to or processed by the AI assistant. Turning it back on creates a fresh API token.
+
+## Use read-only mode
+
+When you first connect Agent Lee, you can choose how much access to grant. **Read only** lets you ask questions and run diagnostics, but prevents Agent Lee from creating, updating, or deleting any resources in your account.
+
+<Steps>
+
+1. Open the **Ask AI** sidebar and select the connection card.
+
+2. Choose **Read only** from the permission template.
+
+3. Confirm the connection. Agent Lee creates an API token scoped to read-only access.
+
+</Steps>
+
+If you previously granted full access, you can switch to read-only at any time:
+
+<Steps>
+
+1. In the Ask AI sidebar, select **Configure** next to the permission summary.
+
+2. Choose **Read only** from the template.
+
+3. Save the change. Agent Lee creates a new read-only token and revokes the previous one.
+
+</Steps>
+
+Switching to read-only takes effect on your next message. Any in-flight conversation continues with the previous permissions.
+
+## Choose custom scopes
+
+If you want more control than the Full access or Read only templates, select **Custom**. This opens a list of Cloudflare products (for example, DNS, Workers, R2) and lets you grant read or write access to each one individually, per account.
+
+Custom scopes are useful when you want Agent Lee to answer questions about some products but not make changes to others. For example, you might allow read and write on DNS records, but read-only on Workers.
+
+Changes to custom scopes follow the same token lifecycle as switching templates: Agent Lee creates a new token with the updated scopes and revokes the old one when you save.
+
+## When permissions take effect
+
+Permission changes are not retroactive. When you update your access level:
+
+- The current conversation continues with the previous permissions.
+- The new permissions apply starting with your next message.
+- Agent Lee creates a fresh API token and revokes the old one, so there is no period where both sets of permissions are active at the same time.
+
+## Write disabled by admin
+
+If an account admin has restricted write permissions for your user on the current account, Agent Lee shows a **Write disabled by admin** indicator in the composer footer. In this state:
+
+- The write-mode selector is hidden.
+- Agent Lee cannot create, update, or delete resources.
+- You can still ask questions and run diagnostics.
+- The restriction applies only to the account where the admin set it. If you switch to a different account, your permissions there are unchanged.
+
+Only an account admin can remove this restriction. If you believe the restriction was applied in error, contact your account administrator.
+
+## Security and privacy
+
+- **Token lifecycle.** Every permission change creates a new API token and revokes the previous one. Old tokens cannot be reused.
+- **No credential in chat.** Agent Lee never places API tokens or clone commands in the chat transcript.
+- **Per-account scoping.** Custom and admin write restrictions apply per account. Permissions on one account do not affect another.
+
+## Limitations
+
+- Permission changes do not apply retroactively to in-flight messages.
+- Read-only mode does not prevent the agent from suggesting changes — it only blocks execution. The agent may still describe what steps to take.
+- Admin write restrictions are account-scoped. An admin on one account cannot restrict your write access on a different account.
+
+## Related resources
+
+- [Agent Lee overview](/agent-lee/)
+- [Export generated code](/agent-lee/take-home-code/)
+- [Cloudflare dashboard account configurations](https://dash.cloudflare.com/?to=/:account/configurations)

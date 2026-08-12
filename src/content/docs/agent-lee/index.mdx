@@ -22,7 +22,7 @@ An AI co-pilot built into the Cloudflare dashboard. Ask questions about your acc
 </Description>
 
 :::note[Beta]
-Agent Lee is currently in beta and only available to accounts on a Free plan. Features and behaviors may change.
+Agent Lee is currently in beta and available to accounts on Free and self-serve paid plans. Features and behaviors may change.
 :::
 
 With Agent Lee, you can:
@@ -45,6 +45,8 @@ Agent Lee answers based on your actual account data, not just documentation. Whe
 ### Write operations
 
 You can ask Agent Lee to create, update, or delete resources across your account using natural language. Every write operation requires your explicit approval before it executes, Agent Lee shows you exactly what it plans to do and waits for confirmation.
+
+If you prefer, you can also use Agent Lee in [read-only mode](/agent-lee/manage-availability/), which prevents all write operations without removing access to questions and diagnostics.
 
 Example requests:
 
@@ -129,6 +131,7 @@ Agent Lee is built on Cloudflare's own developer platform using the same primiti
 
 ## Related resources
 
+- [Manage Agent Lee availability](/agent-lee/manage-availability/)
 - [Agents SDK](/agents/)
 - [Human in the Loop](/agents/concepts/agentic-patterns/human-in-the-loop/)
 - [Workers AI](/workers-ai/)
